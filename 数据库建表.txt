@@ -1,0 +1,128 @@
+INSERT INTO Employees
+	VALUES('000001','王林',TO_DATE('19710123','YYYYMMDD'),'男','中山路32-1-508','210003','83355668','2');
+INSERT INTO Employees
+	VALUES('010008','伍容华',TO_DATE('19810328','YYYYMMDD'),'女','北京东路100-2','210001','83321321','1');
+INSERT INTO Employees
+	VALUES('020010','王向容',TO_DATE('19871209','YYYYMMDD'),'男','四牌楼10-0-108','210006','83792361','1');
+INSERT INTO Employees
+	VALUES('020018','李丽',TO_DATE('19650730','YYYYMMDD'),'男','中山东路102-2','210002','83413301','1');
+INSERT INTO Employees
+	VALUES('102201','刘明',TO_DATE('19771018','YYYYMMDD'),'女','虎距路100-2','210013','83606608','5');
+INSERT INTO Employees
+	VALUES('102208','朱俊',TO_DATE('19700928','YYYYMMDD'),'男','牌楼巷5-3-106','210004','84708817','5');
+INSERT INTO Employees
+	VALUES('108991','钟敏',TO_DATE('19840810','YYYYMMDD'),'女','中山路10-3-105','210003','83346722','3');
+INSERT INTO Employees
+	VALUES('111006','张石兵',TO_DATE('19791001','YYYYMMDD'),'男','解放路34-1-203','210010','84563418','5');
+INSERT INTO Employees
+	VALUES('210678','林涛',TO_DATE('19820402','YYYYMMDD'),'女','中山北路24-35','210008','83467336','3');
+INSERT INTO Employees
+	VALUES('302556','李玉珉',TO_DATE('19730920','YYYYMMDD'),'女','热和路209-3','210001','58765991','4');
+INSERT INTO Employees
+	VALUES('308759','叶凡',TO_DATE('1931118','YYYYMMDD'),'男','北京西路3-7-52','210002','83308901','4');
+INSERT INTO Employees
+	VALUES('504209','陈林琳',TO_DATE('19740903','YYYYMMDD'),'男','汉中路120-4-12','210018','84468158','4');
+INSERT INTO Employees
+	VALUES('954158','王华社',TO_DATE('19750403','YYYYMMDD'),'男','汉西路120-4-12','211018','82268158','3');
+INSERT INTO Employees
+	VALUES('652498','刘向生',TO_DATE('19850610','YYYYMMDD'),'女','汉北路120-4-12','218818','84486158','5');
+INSERT INTO Employees
+	VALUES('244209','李有钱',TO_DATE('1961103','YYYYMMDD'),'男','汉古路120-4-12','214218','86577158','1');
+
+
+
+INSERT INTO Departments
+	VALUES('1','财务部',NULL);
+INSERT INTO Departments
+	VALUES('2','人力资源部',NULL);
+INSERT INTO Departments
+	VALUES('3','经理办公室',NULL);
+INSERT INTO Departments
+	VALUES('4','研发部',NULL);
+INSERT INTO Departments
+	VALUES('5','市场部',NULL);
+
+
+INSERT INTO Salary
+	VALUES('000001','5100.8','1123.09');
+INSERT INTO Salary
+	VALUES('010008','4582.62','1088.03');
+INSERT INTO Salary
+	VALUES('102201','5569.88','1185.65');
+INSERT INTO Salary
+	VALUES('111006','4987.01','1079.58');
+INSERT INTO Salary
+	VALUES('504209','5066.15','1108.0');
+INSERT INTO Salary
+	VALUES('302566','5980.7','1210.2');
+INSERT INTO Salary
+	VALUES('108991','6259.98','1281.52');	
+INSERT INTO Salary
+	VALUES('020010','5860.0','1198.0');
+INSERT INTO Salary
+	VALUES('020018','5347.68','1180.0');
+INSERT INTO Salary
+	VALUES('308759','5531.98','1199.08');
+INSERT INTO Salary
+	VALUES('210678','5240.0','1121.0');
+INSERT INTO Salary
+	VALUES('102208','4980.0','1100.0');
+INSERT INTO Salary
+	VALUES('954158','6545.2','1057.0');
+INSERT INTO Salary
+	VALUES('652498','4599.8','572.5');
+INSERT INTO Salary
+	VALUES('244209','5799.6','1512.0');
+
+
+CREATE TABLE EMPLOYEES
+(     
+ 编号                                       VARCHAR2(20)           NOT NULL   PRIMARY KEY,
+ 姓名                                       VARCHAR2(20)            NOT NULL,
+ 出生日期                                DATE                             NOT NULL,
+ 性别                                       VARCHAR2(20)             NOT NULL,
+ 住址                                        VARCHAR2(20)            NOT NULL,
+ 邮编                                        VARCHAR2(20)             NOT NULL,
+ 电话号码                                 VARCHAR2(20)             NOT NULL,
+ 部门号                                     VARCHAR2(20)             NOT NULL
+ );
+
+CREATE TABLE DEPARTMENTS
+(
+    部门号                                    VARCHAR2(20)     NOT NULL,
+    部门名称                                  VARCHAR2(20)     NOT NULL,
+    备注                                         VARCHAR2(20)      NULL
+ );
+
+CREATE TABLE SALARY
+(
+   编号                                              VARCHAR2(20)       NOT NULL,
+   收入                                               VARCHAR2(20)       NULL,
+   支出                                               VARCHAR2(20)        NULL
+  );
+  
+
+CREATE OR REPLACE TRIGGER ins_emp
+AFTER INSERT ON employees FOR EACH ROW
+BEGIN
+INSERT INTO SALARY (编号,收入,支出)
+VALUES(:NEW.编号,NULL,NULL);
+END;
+/
+
+CREATE TRIGGER mdf_t_tc 
+AFTER INSERT ON topic FOR EACH ROW 
+BEGIN
+UPDATE type SET topics_count = topics_count + 1
+WHERE id= NEW.type_id ;
+    END;
+/
+
+
+
+
+
+
+
+
+
